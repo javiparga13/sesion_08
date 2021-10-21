@@ -1,0 +1,40 @@
+
+
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Arvo:ital@1&display=swap');
+
+
+
+:root {
+    --bs-body-font-family: "Arvo", serif;
+    --bs-body-font-size: 0.9rem;
+    --bs-body-font-weight: 300;
+}
+
+
+h3{
+    font-family: 'Arvo', serif;
+    color: gold;
+}
+h1{
+    font-family: 'Fredoka One', cursive;
+    font-size: 70px;
+    color: rgb(245, 9, 9);
+}
+h2{
+    font-family: 'Arvo', serif;
+    font-size:30px;
+    color: rgb(53, 160, 231);
+}
+p{
+    font-family: 'Arvo', serif;
+}
+
+
+#fondo-con-imagen {
+    height: 90vh;
+    background-image: url("img/casa-home.gif");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size:auto;
+}
