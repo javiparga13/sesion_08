@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link href="style.css" rel="stylesheet" />
+        <title>Evaluación Nº1</title>
+    </head>
+    <body>
+        <nav class="fixed-top container">
+            <div class="row pt-2">
+                <div class="col">
+                    <h3 class="fs-6 d-flex justify-content-between align-items-center"><span>Evaluación</span> <span>Nº1</span></h3>
+                </div>
+            </div>
+        </nav>
+        <header class="container-fluid" id="fondo-con-imagen">
+            <div class="row h-100">
+                <div class="div text-center my-auto">
+                    <h1>El impacto del confinamiento</h1>
+                    <h2>en las redes sociales</h2>
+                </div>
+            </div>
+        </header>
+        <section class="container py-3">
+            <div class="row py-4">
+                <div class="col-sm-10 col-md-8 mx-auto">
+                    <p>Los ciudadanos de Latinoamérica tienen distintas formas de reaccionar ante el confinamiento impuesto por la pandemia de coronavirus. Cuando se trata de comportamiento en redes sociales, los internautas de la región están entre los más activos a nivel mundial. Sin embargo, durante las semanas en las que todos los gobiernos latinoamericanos adoptaron algún tipo de medida de aislamiento social, la actividad online de los usuarios de estas plataformas ha sufrido grandes oscilaciones.</p>
+
+                    <canvas id="misBarritas" width="100" height="70" class="my-5"></canvas>
+                    
+                    <p>En Chile, que se encuentra entre las naciones más afectadas por la pandemia en la región, el número de publicaciones realizadas en redes sociales creció un 53% en marzo de 2020, con respecto al mismo mes del año anterior. Como muestra este gráfico de Statista en base a los datos de Shareablee y comScore, Brasil es otro de los territorios donde los usuarios de redes se han mostrado más extrovertidos, con un incremento de casi 37% en el número de posts en Facebook, Instagram y Twitter.</p>
+
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" class="my-5">
+                        <defs>
+                            <clipPath id="recorte">
+                                <path d="M 10,30
+                                A 20,20 0,0,1 50,30
+                                A 20,20 0,0,1 90,30
+                                Q 90,60 50,90
+                                Q 10,60 10,30 z"></path>
+                            </clipPath>
+                        </defs>
+                        <image width="100" height="100" clip-path="url(#recorte)" xlink:href="https://png.pngtree.com/element_our/md/20180523/md_5b0524d7b68ca.jpg" >
+                    </svg>
+
+                    <p>En otros Estados como Ecuador y Panamá, que también han sido algunos de los más golpeados por el brote de COVID-19, los internautas prefirieron prestarle menos atención a las redes durante la cuarentena. En Panamá, las publicaciones en estas plataformas sufrieron una caída del 54%, mientras que en Ecuador disminuyeron cerca del 31%.</p>
+                    
+                    <div id="carouselExampleSlidesOnly" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="img/01.jpg" class="d-block w-100">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="img/02.jpg" class="d-block w-100">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="img/03.jpg" class="d-block w-100">
+                          </div>
+                        </div>
+                      </div>
+
+                    
+                    
+
+                </div>
+            </div>
+        </section>
+        <footer class="container border-top">
+            <div class="row pt-3">
+                <div class="col">
+                    <p class="d-flex justify-content-between align-items-center small"><a href="#">Javiera Parga</a> <a href="#">AUD5V0010</a></p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            var altura = document.getElementById("fondo-con-imagen").offsetHeight;
+            window.addEventListener("scroll", (event) => {
+                let scroll = this.scrollY;
+                console.log(scroll);
+                var element = document.getElementsByTagName("nav")[0];
+                if (scroll > altura) {
+                    element.classList.add("d-none");
+                } else {
+                    element.classList.remove("d-none");
+                }
+            });
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.1/chart.min.js"
+            integrity="sha512-Wt1bJGtlnMtGP0dqNFH1xlkLBNpEodaiQ8ZN5JLA5wpc1sUlk/O5uuOMNgvzddzkpvZ9GLyYNa8w2s7rqiTk5Q=="
+            crossorigin="anonymous"
+            referrerpolicy="no-referrer"
+        ></script>
+        <script>
+            fetch("https://raw.githubusercontent.com/javiparga13/sesion_08/main/data.json")
+                .then((response) => response.json())
+                .then((poblacion) => {
+                    console.log(poblacion);
+                    var losPaises = [],
+                        losPorcentajes = [];
+
+                    poblacion.forEach((d) => {
+                        losPaises.push(d.pais);
+                        losPorcentajes.push(d.porcentaje);
+                    });
+
+                    new Chart(document.getElementById("misBarritas").getContext("2d"), {
+                        type: "bar",
+                        data: {
+                            labels: losPaises,
+                            datasets: [
+                                {
+                                    data: losPorcentajes,
+                                    backgroundColor: "#f9082b",
+                                    label: "Porcentajes",
+                                },
+                            ],
+                        },
+                        options: {
+                            indexAxis: 'y',
+                            scales: {
+                                x: {
+                                    ticks: {
+                                        callback: function (numero) {
+                                            return numero.toLocaleString("es-CL");
+                                        },
+                                    },
+                                },
+                            },
+                            plugins: {
+                                title: {
+                                    display: true,
+                                    text: "El uso de redes sociales en tiempos de cuarentena en América Latina",
+                                },
+                            },
+                        },
+                    });
+                })
+                .catch((error) => console.log("¡PLW!", error));
+        </script>
+    </body>
+</html>
